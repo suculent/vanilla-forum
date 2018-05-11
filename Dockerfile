@@ -30,7 +30,6 @@ RUN docker-php-ext-install pdo pdo_mysql \
     && cd themes \
     && wget https://us.v-cdn.net/5018160/uploads/addons/1BBGR0AIXD80.zip \
     && unzip 1BBGR0AIXD80.zip \
-
     && echo 'display_errors = Off\nlog_errors = On' >> /usr/local/etc/php/php.ini
 
 VOLUME /var/www/html/uploads
