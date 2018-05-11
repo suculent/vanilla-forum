@@ -36,3 +36,4 @@ VOLUME /var/www/html/uploads
 VOLUME /var/www/html/conf
 
 EXPOSE 8080:80
+EXPOSE 9090:9090
