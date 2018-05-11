@@ -2,7 +2,7 @@ version: "2"
 
 services:
   db:
-    image: mysql
+    image: mysql:5.6
     env_file: .env
     restart: always
     volumes:
@@ -15,7 +15,7 @@ services:
       - 9090:8080
 
   app:
-    image: suculent/vanilla-forum
+    image: suculent/vanilla-forums
     links:
      - db:mysql
     env_file: .env
