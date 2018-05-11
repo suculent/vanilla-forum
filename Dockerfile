@@ -15,6 +15,12 @@ RUN docker-php-ext-install pdo pdo_mysql \
     && apt-get update && apt-get install -y --fix-missing unzip nano \
     && curl -sSL "https://github.com/vanilla/vanilla/archive/release/${VANILLA_VERSION}.zip" -o vanilla.zip \
     && unzip vanilla.zip \
+    && cd /var/www/html \
+    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \
+    && php composer-setup.php \
+    && php -r "unlink('composer-setup.php');" \
+    && php composer.phar install \
     && cp -rT vanilla-release-* /var/www/html \
     && rm -rf vanilla-release-* \
     && chmod -R 777 /var/www/html/conf \
@@ -22,8 +28,9 @@ RUN docker-php-ext-install pdo pdo_mysql \
     && chmod -R 777 /var/www/html/uploads \
     && echo 'log_errors=on\nerror_reporting="E_ALL"' > /usr/local/etc/php/php.ini \
     && cd themes \
-    && wget https://15254b2dcaab7f5478ab-24461f391e20b7336331d5789078af53.ssl.cf1.rackcdn.com/www.vanillaforums.org/addons/5TNP719UEGVK.zip \
-    && unzip 5TNP719UEGVK.zip \
+    && wget https://us.v-cdn.net/5018160/uploads/addons/1BBGR0AIXD80.zip \
+    && unzip 1BBGR0AIXD80.zip \
+
     && echo 'display_errors = Off\nlog_errors = On' >> /usr/local/etc/php/php.ini
 
 VOLUME /var/www/html/uploads
