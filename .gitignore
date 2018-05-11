@@ -1,4 +1,3 @@
-uploads/
-conf/
-
+docker-compose/uploads/
+docker-compose/conf/config.php
 *.sh
