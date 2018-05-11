@@ -6,7 +6,13 @@ services:
     env_file: .env
     restart: always
     volumes:
-      - data-volume:/var/lib/mysql
+      - data-vanilla:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9090:8080
 
   app:
     image: suculent/vanilla-forum
@@ -21,5 +27,4 @@ services:
       - 8080:80
 
 volumes:
-  data-volume:
-
+  data-vanilla:
