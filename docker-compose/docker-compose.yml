@@ -1,0 +1,25 @@
+version: "2"
+
+services:
+  db:
+    image: mysql
+    env_file: .env
+    restart: always
+    volumes:
+      - data-volume:/var/lib/mysql
+
+  app:
+    image: suculent/vanilla-forum
+    links:
+     - db:mysql
+    env_file: .env
+    restart: always
+    volumes:
+     - ./uploads:/var/www/html/uploads
+     - ./conf:/var/www/html/conf
+    ports:
+      - 8080:80
+
+volumes:
+  data-volume:
+
